@@ -1,0 +1,172 @@
+
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- p5 core library -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+
+    <!-- A-Frame core library -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+    <!-- AFrameP5 library -->
+    <script src="https://craignyu.github.io/aframep5/libraries/aframep5-v2.1.js"></script>
+
+    <script>
+      // let sketchCode1 = function(p) {
+      //   // the variable p will be a reference to the p5 API and will
+      //   // contain all p5 specific functions (ellipse, rect, createCanvas, etc.)
+
+      //   // start off by creating a setup function
+      //   // note the 'p.' prefix in front of any p5 related function
+      //   p.setup = function() {
+      //     p.createCanvas(250,250);
+      //     p.background(0);
+      //     p.noStroke();
+      //   }
+
+      //   // also create a draw function
+      //   p.draw = function() {
+      //     p.fill(p.random(255));
+      //     p.ellipse( p.random(250), p.random(250), 10, 10);
+
+      //     p.fill(0,255,0);
+      //     p.ellipse(p.mouseX, p.mouseY, 10, 10);
+      //   }
+      // }
+
+      // // step 2 - use this function to create an 'instance' of the p5 sketch
+      // // think of this like an independent copy of the sketch
+      // // we will take a lot more about this when we cover OOP in our next
+      // // few classes!!
+      // let sketch1 = new p5( sketchCode1 , 'container');
+
+    </script>
+
+    <!-- custom styles -->
+    <style>
+      body {
+        color: white;
+        padding: 0;
+        margin: 0;
+      }
+
+      #controls{
+        top: 320px;
+        position: absolute;
+        z-index: 101;
+        left: 30px;
+        padding: 20px;
+        background-color: rgba(0,255,255,0.5);
+      }
+
+      canvas {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      #my_p5_canvas_element{
+        border: 2px white solid;
+      }
+
+      #container{
+        position: absolute;
+        left: 20px;
+        z-index: 100;
+      }
+
+      #close{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+      }
+
+
+      #show{
+        display:  none;
+        position: absolute;
+        width: 80%;
+        left: 120px;
+        top: 50px;
+        margin: auto;
+        z-index: 102;
+        padding: 20px;
+        background-color: rgba(255,255,255,0.8);
+        color: black;
+      }
+
+      .a{
+        display: inline-block;
+        inline-size: 250px;
+        overflow-wrap: break-word;
+        margin: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    <div id="container"></div>
+    <div id="controls">
+      Color: <input type="color" id="favcolor" name="favcolor" value="#FFFFFF" oninput="changeColor(this)"><br>
+      Stroke: <input type="range" id="r" min="2" max="30" step="1" value="5" oninput="changeStroke(this);"><br>
+      <input type="radio" id="small" name="arrangement" value="0.7" oninput="changeSize(this);">
+        <label for="small">Small</label><br>
+        <input type="radio" id="medium" name="arrangement" value="1" oninput="changeSize(this);" chekced="chekced"/>
+        <label for="medium">Medium</label><br>
+        <input type="radio" id="large" name="arrangement" value="1.2" oninput="changeSize(this);">
+        <label for="large">Large</label><br>
+         <button id="rotate" onclick="rotation()">Rotate</button><br>
+      <button id="clear" onclick="clearCanvas()">Clear</button><br>
+      <button id="inspiration" onclick="show()">See Inspirations</button><br>
+
+
+      <!-- <button id="close">x</button><br> -->
+
+    </div>
+
+
+    <div id="show">
+      <button id="close" onclick="hide()">x</button><br>
+      <div class='a'>
+        <img src="wall1.jpg" width=250px>
+        <p>Sidewall, Sahara, 1928, designed by Edward Bawden and produced by The Curwen Press</p>
+      </div>
+
+      <div class='a'>
+        <img src="wall2.jpg" width=250px>
+        <p>Sidewall, Razzmatazz, 1967, designed by William Justema and manufactured by Stamford Wallpaper Co.</p>
+      </div>
+
+      <div class='a'>
+        <img src="wall3.jpeg" width=250px>
+        <p>Sidewall, 1080 Cadires, 2010, designed by Javier Mariscal</p>
+      </div>
+
+      <div class='a'>
+        <img src="wall4.jpg" width=250px>
+        <p>Sidewall, Sunflower, 1922, designed by M.H. Birge & Sons Co.</p>
+      </div>
+    </div>
+    
+
+  </div>
+    <!-- container to hold our VR scene - make sure to give this element an ID of 'VRScene' -->
+      <a-scene id="VRScene">
+
+        <a-assets id="VRAssets">
+          <img src="wood.jpeg" id="wood">
+          <img src="wall1.jpg" id="wall1">
+          <img src="wall2.jpg" id="wall2">
+          <img src="wall3.jpeg" id="wall3">
+          <img src="wall4.jpg" id="wall4">
+
+        </a-assets>
+
+      </a-scene>
+
+    <script src="sketch.js"></script>
+
+  </body>
+</html>
